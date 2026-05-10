@@ -167,7 +167,7 @@ The Reflection pass returns four diagnostic signals fed into the Optimization pa
 | Gemini | `gemini.google.com` |
 | Perplexity | `perplexity.ai` |
 | Microsoft Copilot | `copilot.microsoft.com` |
-| You.com | `you.com` |
+
 
 ---
 
