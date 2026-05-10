@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prompt Enhancer — Production-Quality AI Prompts in One Click</title>
+  <meta name="description"
+    content="Transform rough AI prompts into structured, production-ready instructions directly inside ChatGPT, Claude, and Gemini. No backend. No subscription. Your API keys, your data." />
+  <meta property="og:title" content="Prompt Enhancer" />
+  <meta property="og:description" content="Research-backed prompt optimization. In-flow. Privacy-first. Free." />
+  <meta property="og:type" content="website" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            indigo: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['SF Mono', 'Fira Code', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .gradient-hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+
+    .gradient-card {
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #818cf8, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .pipeline-line::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 24px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #6366f1, transparent);
+    }
+
+    .animate-pulse-slow {
+      animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .fade-up-2 {
+      animation: fadeUp 0.6s 0.15s ease both;
+    }
+
+    .fade-up-3 {
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details summary {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+
+  <!-- ── Navigation ── -->
+  <nav class="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14">
+      <a href="#" class="flex items-center gap-2 font-bold text-indigo-600 text-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <polygon
+            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+        Prompt Enhancer
+      </a>
+      <div class="hidden sm:flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a href="#solution" class="hover:text-indigo-600 transition-colors">Solution</a>
+        <a href="#pipeline" class="hover:text-indigo-600 transition-colors">Pipeline</a>
+        <a href="#business" class="hover:text-indigo-600 transition-colors">Business</a>
+        <a href="#roadmap" class="hover:text-indigo-600 transition-colors">Roadmap</a>
+        <a href="#owner" class="hover:text-indigo-600 transition-colors">Team</a>
+        <a href="https://www.linkedin.com/in/srimon" target="_blank" rel="noopener"
+          class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-700 transition-colors">
+          Connect
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="gradient-hero pt-14 min-h-screen flex flex-col items-center justify-center text-center px-4 py-24">
+    <div class="fade-up max-w-4xl mx-auto">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse-slow"></span>
+        MVP · Early Adoption Stage
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-tight mb-6">
+        Better Prompts.<br />
+        <span class="gradient-text">Better AI.</span><br />
+        One Click.
+      </h1>
+
+      <p class="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed fade-up-2">
+        A research-backed Chrome Extension that transforms rough AI prompts into structured, production-ready
+        instructions — directly inside ChatGPT, Claude, and Gemini. No backend. No subscription. Your API keys, your
+        data.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center fade-up-3">
+        <a href="https://github.com/srimon/prompt-enhancer"
+          class="px-8 py-3.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-bold text-base transition-all shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5">
+          View on GitHub →
+        </a>
+        <a href="#solution"
+          class="px-8 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-base transition-all">
+          See How It Works
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-3xl mx-auto w-full fade-up-3">
+      <div class="text-center">
+        <div class="text-3xl font-black text-white">5</div>
+        <div class="text-xs text-gray-400 mt-1 font-medium">AI Providers</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-black text-white">15+</div>
+        <div class="text-xs text-gray-400 mt-1 font-medium">Supported Models</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-black text-white">7</div>
+        <div class="text-xs text-gray-400 mt-1 font-medium">AI Chat Sites</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-black text-white">0</div>
+        <div class="text-xs text-gray-400 mt-1 font-medium">Third-Party Servers</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Problem ── -->
+  <section class="py-24 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-xs font-bold uppercase tracking-widest text-indigo-500 mb-3">The Problem</div>
+        <h2 class="text-3xl sm:text-4xl font-black text-gray-900">Most AI outputs fail — not the model. The prompt.</h2>
+        <p class="mt-4 text-gray-500 max-w-xl mx-auto">Users re-prompt 3–5× per task. Generic responses burn tokens,
+          time, and trust in AI tooling.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="p-6 rounded-2xl bg-red-50 border border-red-100">
+          <div class="text-2xl mb-3">🎯</div>
+          <h3 class="font-bold text-gray-800 mb-2">Vague Prompts</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">One-line inputs yield generic responses. Users re-prompt 3–5×
+            per task, wasting tokens and time.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-amber-50 border border-amber-100">
+          <div class="text-2xl mb-3">🧱</div>
+          <h3 class="font-bold text-gray-800 mb-2">No Structure</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Without role, constraints, and output format, the model
+            cannot determine success criteria.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-orange-50 border border-orange-100">
+          <div class="text-2xl mb-3">🔄</div>
+          <h3 class="font-bold text-gray-800 mb-2">Context Switching</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Separate "prompt engineering" tools break flow — adding
+            friction to every AI interaction.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-rose-50 border border-rose-100">
+          <div class="text-2xl mb-3">🔒</div>
+          <h3 class="font-bold text-gray-800 mb-2">Privacy Risk</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">SaaS prompt tools process your prompts on third-party
+            servers. $10–$99/month for the privilege.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Solution ── -->
+  <section id="solution" class="py-24 px-4 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-xs font-bold uppercase tracking-widest text-indigo-500 mb-3">The Solution</div>
+        <h2 class="text-3xl sm:text-4xl font-black text-gray-900">In-flow. Research-backed. Private.</h2>
+        <p class="mt-4 text-gray-500 max-w-xl mx-auto">A ★ button appears in every AI chat input. One click — a 2-call
+          Reflect-then-Refine pipeline runs, entirely in your browser.</p>
+      </div>
+
+      <!-- Feature cards -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+        <div class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-800 mb-2">In-Flow Enhancement</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Enhances prompts directly inside ChatGPT, Claude, Gemini, and
+            Perplexity — no tab switching, no copy-paste.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-800 mb-2">Privacy-First Architecture</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Keys stored in <code
+              class="bg-gray-100 px-1 rounded text-xs">chrome.storage.local</code>. Prompts go directly browser → AI
+            provider. Zero third-party exposure.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
+              <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-800 mb-2">Framework-Aware Output</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Auto-selects RISEN (code), RTF (job), TAG (brainstorm), or
+            COSTAR (general) based on detected use case.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-800 mb-2">5-Dimension Scoring</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Every prompt scored locally on clarity, specificity,
+            completeness, token efficiency, and actionability — before any API call.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-800 mb-2">Self-Improving History</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Accepted enhancements feed a personal library.
+            Jaccard-matched examples inject into future calls — quality compounds with use.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M12 1v4m0 14v4M4.22 4.22l2.83 2.83m9.9 9.9 2.83 2.83M1 12h4m14 0h4M4.22 19.78l2.83-2.83m9.9-9.9 2.83-2.83" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-800 mb-2">5 AI Providers</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Gemini, Claude, OpenAI, DeepSeek, Nvidia NIM. 15+ models. One
+            interface. Bring your own key.</p>
+        </div>
+      </div>
+
+      <!-- Supported sites -->
+      <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+        <h3 class="font-bold text-gray-800 mb-4 text-sm uppercase tracking-wider">Works On</h3>
+        <div class="flex flex-wrap gap-3">
+          <span
+            class="px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-100 text-sm font-medium text-gray-700">ChatGPT</span>
+          <span
+            class="px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-100 text-sm font-medium text-gray-700">Claude</span>
+          <span
+            class="px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-100 text-sm font-medium text-gray-700">Gemini</span>
+          <span
+            class="px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-100 text-sm font-medium text-gray-700">Perplexity</span>
+          <span
+            class="px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-100 text-sm font-medium text-gray-700">Microsoft
+            Copilot</span>
+          <span
+            class="px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-100 text-sm font-medium text-gray-700">You.com</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pipeline ── -->
+  <section id="pipeline" class="py-24 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-xs font-bold uppercase tracking-widest text-indigo-500 mb-3">The Algorithm</div>
+        <h2 class="text-3xl sm:text-4xl font-black text-gray-900">2-Call Reflect-then-Refine Pipeline</h2>
+        <p class="mt-4 text-gray-500 max-w-2xl mx-auto">
+          Implements three research algorithms from Pryzant et al. (arXiv:2601.13922) and LangChain's Prompt
+          Optimization work — fused into an efficient 2-call pipeline.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <!-- Steps -->
+        <div class="space-y-6">
+          <div class="flex gap-4">
+            <div
+              class="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-black text-sm flex items-center justify-center">
+              0</div>
+            <div>
+              <div class="font-bold text-gray-800">Local Scoring <span class="text-xs font-normal text-gray-400 ml-2">0
+                  API calls</span></div>
+              <p class="text-sm text-gray-500 mt-1">5-dimension heuristic scores clarity, specificity, completeness,
+                token efficiency, and actionability locally. Builds gradient report of deficits.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div
+              class="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-black text-sm flex items-center justify-center">
+              1</div>
+            <div>
+              <div class="font-bold text-gray-800">Reflection Pass <span
+                  class="text-xs font-normal text-indigo-400 ml-2">~70% of prompts</span></div>
+              <p class="text-sm text-gray-500 mt-1">If avg score &lt; 7.5: Call 1 diagnoses weaknesses and returns a
+                structured scratchpad with <code class="bg-gray-100 px-1 rounded text-xs">coverageScore</code>, <code
+                  class="bg-gray-100 px-1 rounded text-xs">leakageRisk</code>, and <code
+                  class="bg-gray-100 px-1 rounded text-xs">highestImpactFix</code>. Strong prompts skip this call
+                entirely.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div
+              class="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-600 text-white font-black text-sm flex items-center justify-center">
+              2</div>
+            <div>
+              <div class="font-bold text-gray-800">Optimization Pass <span
+                  class="text-xs font-normal text-gray-400 ml-2">always runs</span></div>
+              <p class="text-sm text-gray-500 mt-1">Call 2 receives: raw prompt + gradient report + dynamic few-shot
+                examples from history + scratchpad + target model tag. Applies the matched framework (RISEN / RTF / TAG
+                / COSTAR) and enforces all 5 essential elements.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div
+              class="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 text-green-700 font-black text-sm flex items-center justify-center">
+              ✓</div>
+            <div>
+              <div class="font-bold text-gray-800">Leakage Check + History Save</div>
+              <p class="text-sm text-gray-500 mt-1">Local Jaccard heuristic flags shallow rewrites. On accept, the pair
+                is appended to personal history — feeding dynamic examples for future enhancements.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Framework table -->
+        <div class="space-y-4">
+          <h3 class="font-bold text-gray-700 text-sm uppercase tracking-wider">Auto-Selected Frameworks</h3>
+          <div class="space-y-3">
+            <div class="p-4 rounded-xl bg-indigo-50 border border-indigo-100">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-lg">💻</span>
+                <span class="font-bold text-indigo-800">RISEN</span>
+                <span class="text-xs text-indigo-500 ml-auto">Code · AI-build</span>
+              </div>
+              <p class="text-xs text-indigo-700">Role · Instructions · Steps · End goal · Narrowing</p>
+            </div>
+            <div class="p-4 rounded-xl bg-blue-50 border border-blue-100">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-lg">💼</span>
+                <span class="font-bold text-blue-800">RTF</span>
+                <span class="text-xs text-blue-500 ml-auto">Job Application</span>
+              </div>
+              <p class="text-xs text-blue-700">Role · Task (XYZ formula) · Format</p>
+            </div>
+            <div class="p-4 rounded-xl bg-violet-50 border border-violet-100">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-lg">🚀</span>
+                <span class="font-bold text-violet-800">TAG</span>
+                <span class="text-xs text-violet-500 ml-auto">Tech Brainstorm</span>
+              </div>
+              <p class="text-xs text-violet-700">Task · Action · Goal (markdown table output)</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-lg">⚡</span>
+                <span class="font-bold text-slate-800">COSTAR</span>
+                <span class="text-xs text-slate-500 ml-auto">General · Research</span>
+              </div>
+              <p class="text-xs text-slate-700">Context · Objective · Style · Tone · Audience · Response</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Business Model ── -->
+  <section id="business" class="py-24 px-4 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-xs font-bold uppercase tracking-widest text-indigo-500 mb-3">Business Model</div>
+        <h2 class="text-3xl sm:text-4xl font-black text-gray-900">From Free Tool to Enterprise SaaS</h2>
+        <p class="mt-4 text-gray-500 max-w-xl mx-auto">Zero marginal cost on the free tier. Data moat compounds with
+          usage. Three-tier revenue architecture with clear LTV drivers.</p>
+      </div>
+
+      <!-- TAM/SAM/SOM -->
+      <div class="grid sm:grid-cols-3 gap-5 mb-12">
+        <div class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
+          <div class="text-3xl font-black text-gray-800 mb-1">~500M</div>
+          <div class="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-2">TAM</div>
+          <p class="text-sm text-gray-500">Global knowledge workers using AI tools daily. ChatGPT alone: 200M+ weekly
+            actives (Jan 2025).</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm text-center ring-2 ring-indigo-100">
+          <div class="text-3xl font-black text-indigo-600 mb-1">~50M</div>
+          <div class="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-2">SAM</div>
+          <p class="text-sm text-gray-500">Power users running AI ≥5× daily: developers, researchers, marketers,
+            consultants.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
+          <div class="text-3xl font-black text-gray-800 mb-1">~5M</div>
+          <div class="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-2">SOM</div>
+          <p class="text-sm text-gray-500">Chrome users willing to invest in prompt quality tooling. Target: 50K paid
+            users in 24 months.</p>
+        </div>
+      </div>
+
+      <!-- Revenue tiers -->
+      <div class="grid sm:grid-cols-3 gap-5 mb-12">
+        <!-- Free -->
+        <div class="p-6 rounded-2xl bg-white border border-gray-200">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="font-black text-gray-900 text-lg">Free / BYOK</div>
+              <div class="text-2xl font-black text-gray-400 mt-1">$0</div>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-xs font-bold">Current</span>
+          </div>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span>Unlimited enhancements with
+              own API key</li>
+            <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span>All 5 providers · 15+ models
+            </li>
+            <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span>Personal history · dynamic
+              few-shot</li>
+            <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span>$0 COGS → infinite gross
+              margin</li>
+          </ul>
+        </div>
+
+        <!-- Pro -->
+        <div class="p-6 rounded-2xl gradient-card text-white shadow-lg shadow-indigo-500/20 relative overflow-hidden">
+          <div class="absolute inset-0 bg-white/5 rounded-2xl"></div>
+          <div class="relative">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <div class="font-black text-white text-lg">Pro</div>
+                <div class="text-2xl font-black text-indigo-200 mt-1">$9<span class="text-sm font-medium">/mo</span>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-white/20 text-white text-xs font-bold">Q4 2026</span>
+            </div>
+            <ul class="space-y-2 text-sm text-indigo-100">
+              <li class="flex items-start gap-2"><span class="text-indigo-200 mt-0.5">✓</span>Hosted API key — no AI
+                account needed</li>
+              <li class="flex items-start gap-2"><span class="text-indigo-200 mt-0.5">✓</span>Unlimited credits ·
+                priority model access</li>
+              <li class="flex items-start gap-2"><span class="text-indigo-200 mt-0.5">✓</span>Prompt quality dashboard +
+                trend charts</li>
+              <li class="flex items-start gap-2"><span class="text-indigo-200 mt-0.5">✓</span>LTV target: $216 · CAC
+                target: &lt;$15</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="p-6 rounded-2xl bg-white border border-gray-200">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="font-black text-gray-900 text-lg">Enterprise</div>
+              <div class="text-2xl font-black text-gray-400 mt-1">$299<span class="text-sm font-medium">/seat/mo</span>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold">Q2 2026</span>
+          </div>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">✓</span>White-label SDK for internal
+              tools</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">✓</span>SOC 2 Type II · zero prompt
+              retention</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">✓</span>Custom framework injection
+              per org</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">✓</span>ARR target: $3,588/account
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Competitive table -->
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div class="px-6 py-4 border-b border-gray-100">
+          <h3 class="font-bold text-gray-800">Competitive Differentiation</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-5 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Dimension</th>
+                <th class="px-5 py-3 text-center text-xs font-bold text-indigo-600 uppercase tracking-wider">Prompt
+                  Enhancer</th>
+                <th class="px-5 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">PromptSloth
+                </th>
+                <th class="px-5 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">PromptPerfect
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr>
+                <td class="px-5 py-3 font-medium text-gray-700">Data Privacy</td>
+                <td class="px-5 py-3 text-center text-green-600 font-semibold">BYOK · Local only</td>
+                <td class="px-5 py-3 text-center text-gray-400">Cloud-processed</td>
+                <td class="px-5 py-3 text-center text-gray-400">Cloud-processed</td>
+              </tr>
+              <tr class="bg-gray-50/50">
+                <td class="px-5 py-3 font-medium text-gray-700">Subscription Required</td>
+                <td class="px-5 py-3 text-center text-green-600 font-semibold">No</td>
+                <td class="px-5 py-3 text-center text-gray-400">Yes</td>
+                <td class="px-5 py-3 text-center text-gray-400">Yes ($10–99/mo)</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium text-gray-700">In-Flow UX</td>
+                <td class="px-5 py-3 text-center text-green-600 font-semibold">★ In-page button</td>
+                <td class="px-5 py-3 text-center text-gray-400">Separate tool</td>
+                <td class="px-5 py-3 text-center text-gray-400">Separate tool</td>
+              </tr>
+              <tr class="bg-gray-50/50">
+                <td class="px-5 py-3 font-medium text-gray-700">Algorithm Depth</td>
+                <td class="px-5 py-3 text-center text-green-600 font-semibold">2-call Reflect-Refine + gradients +
+                  few-shot</td>
+                <td class="px-5 py-3 text-center text-gray-400">Single-pass</td>
+                <td class="px-5 py-3 text-center text-gray-400">Single-pass</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium text-gray-700">Personal History</td>
+                <td class="px-5 py-3 text-center text-green-600 font-semibold">Dynamic few-shot</td>
+                <td class="px-5 py-3 text-center text-gray-400">None</td>
+                <td class="px-5 py-3 text-center text-gray-400">None</td>
+              </tr>
+              <tr class="bg-gray-50/50">
+                <td class="px-5 py-3 font-medium text-gray-700">Open Source</td>
+                <td class="px-5 py-3 text-center text-green-600 font-semibold">Yes</td>
+                <td class="px-5 py-3 text-center text-gray-400">No</td>
+                <td class="px-5 py-3 text-center text-gray-400">No</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Roadmap ── -->
+  <section id="roadmap" class="py-24 px-4 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-xs font-bold uppercase tracking-widest text-indigo-500 mb-3">Product Lifecycle</div>
+        <h2 class="text-3xl sm:text-4xl font-black text-gray-900">3-Phase Roadmap</h2>
+        <div
+          class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-700 text-sm font-semibold">
+          <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+          Current Stage: MVP → Early Adoption
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <!-- Phase 1 -->
+        <div class="flex gap-6">
+          <div class="flex-shrink-0 flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full bg-green-100 border-2 border-green-400 flex items-center justify-center">
+              <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" stroke-width="2.5"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div class="flex-1 w-0.5 bg-gray-100 mt-3"></div>
+          </div>
+          <div class="pb-8 flex-1">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="font-black text-gray-900 text-lg">Phase 1 — Distribution</span>
+              <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 text-xs font-bold">Q3 2026</span>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-2">
+              <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                <span class="text-gray-400">☐</span> Chrome Web Store submission
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                <span class="text-gray-400">☐</span> Icon set (16 / 48 / 128 px)
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                <span class="text-gray-400">☐</span> Firefox / Edge port
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                <span class="text-gray-400">☐</span> Product Hunt launch
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="flex gap-6">
+          <div class="flex-shrink-0 flex flex-col items-center">
+            <div
+              class="w-10 h-10 rounded-full bg-indigo-100 border-2 border-indigo-400 flex items-center justify-center">
+              <span class="font-black text-indigo-600 text-sm">2</span>
+            </div>
+            <div class="flex-1 w-0.5 bg-gray-100 mt-3"></div>
+          </div>
+          <div class="pb-8 flex-1">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="font-black text-gray-900 text-lg">Phase 2 — Pro Tier</span>
+              <span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold">Q4 2026 – Q1
+                2026</span>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-2">
+              <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                <span class="text-gray-400">☐</span> Stripe + license key system
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                <span class="text-gray-400">☐</span> Hosted API key pool
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                <span class="text-gray-400">☐</span> Prompt quality dashboard
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                <span class="text-gray-400">☐</span> Safari extension
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="flex gap-6">
+          <div class="flex-shrink-0 flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full bg-gray-100 border-2 border-gray-300 flex items-center justify-center">
+              <span class="font-black text-gray-400 text-sm">3</span>
+            </div>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="font-black text-gray-900 text-lg">Phase 3 — Enterprise & Platform</span>
+              <span class="px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 text-xs font-bold">Q2–Q3 2026</span>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-2">
+              <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                <span class="text-gray-400">☐</span> Team workspace + shared templates
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                <span class="text-gray-400">☐</span> REST API + JavaScript SDK
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                <span class="text-gray-400">☐</span> SOC 2 Type II certification
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                <span class="text-gray-400">☐</span> Notion · Salesforce · Slack integrations
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Technical Stack ── -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl font-black text-gray-900 text-center mb-10">Technical Stack</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="p-5 bg-white rounded-xl border border-gray-100 shadow-sm">
+          <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Extension Runtime</div>
+          <p class="text-sm text-gray-700 font-medium">Chrome Manifest V3 · Service Worker</p>
+          <p class="text-xs text-gray-400 mt-1">background.js handles all API calls; content.js handles DOM injection
+          </p>
+        </div>
+        <div class="p-5 bg-white rounded-xl border border-gray-100 shadow-sm">
+          <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Storage</div>
+          <p class="text-sm text-gray-700 font-medium">chrome.storage.local</p>
+          <p class="text-xs text-gray-400 mt-1">Keys · settings · history (max 20 pairs) · button position</p>
+        </div>
+        <div class="p-5 bg-white rounded-xl border border-gray-100 shadow-sm">
+          <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">AI Provider Calls</div>
+          <p class="text-sm text-gray-700 font-medium">Native fetch() · Zero SDK dependencies</p>
+          <p class="text-xs text-gray-400 mt-1">callGemini · callAnthropic · callOpenAI (reused for DeepSeek + Nvidia)
+          </p>
+        </div>
+        <div class="p-5 bg-white rounded-xl border border-gray-100 shadow-sm">
+          <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Algorithms</div>
+          <p class="text-sm text-gray-700 font-medium">Jaccard similarity · Local heuristic scorer</p>
+          <p class="text-xs text-gray-400 mt-1">Lenient JSON cascade parser · Leakage heuristic (Jaccard + length
+            growth)</p>
+        </div>
+        <div class="p-5 bg-white rounded-xl border border-gray-100 shadow-sm">
+          <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">UI</div>
+          <p class="text-sm text-gray-700 font-medium">Vanilla JS · Hand-authored CSS</p>
+          <p class="text-xs text-gray-400 mt-1">CSS isolation via <code
+              class="bg-gray-100 px-1 rounded">all: initial</code> · pe- namespace prefix</p>
+        </div>
+        <div class="p-5 bg-white rounded-xl border border-gray-100 shadow-sm">
+          <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Text Replacement</div>
+          <p class="text-sm text-gray-700 font-medium">4-strategy cascade</p>
+          <p class="text-xs text-gray-400 mt-1">execCommand → DataTransfer → clipboard API → innerText fallback</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Product Owner ── -->
+  <section id="owner" class="py-24 px-4 bg-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <div class="text-xs font-bold uppercase tracking-widest text-indigo-500 mb-3">Built By</div>
+      <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-12">Product Owner</h2>
+
+      <div
+        class="relative p-8 rounded-3xl bg-gradient-to-br from-indigo-50 to-white border border-indigo-100 shadow-sm">
+        <div
+          class="w-20 h-20 rounded-full gradient-card flex items-center justify-center mx-auto mb-6 shadow-lg shadow-indigo-500/30">
+          <span class="text-3xl font-black text-white">S</span>
+        </div>
+
+        <h3 class="text-2xl font-black text-gray-900 mb-1">Srimon</h3>
+        <p class="text-indigo-600 font-semibold text-sm mb-6">Builder · AI Product Architect · Full-Stack Engineer</p>
+
+        <p class="text-gray-600 leading-relaxed mb-8 text-sm">
+          Designed and built Prompt Enhancer end-to-end — translating academic prompt optimization research (Pryzant et
+          al., LangChain) into a production Chrome Extension with a clear path from free tool to enterprise SaaS. The
+          project demonstrates applied AI product thinking across the full stack: research-backed pipeline design,
+          zero-backend privacy architecture, multi-provider API dispatch, DOM injection into live AI chat interfaces,
+          and a complete popup settings UI — all shipped without external dependencies.
+        </p>
+
+        <a href="https://www.linkedin.com/in/srimon" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition-all shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+          Connect on LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="gradient-hero py-24 px-4 text-center">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">Ready to try it?</h2>
+      <p class="text-gray-300 mb-10">Install in developer mode in under 2 minutes. Bring your own API key from Gemini,
+        Claude, or OpenAI.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://github.com/srimon/prompt-enhancer"
+          class="px-8 py-3.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-bold transition-all shadow-lg shadow-indigo-500/30 hover:-translate-y-0.5">
+          View Source on GitHub →
+        </a>
+        <a href="https://www.linkedin.com/in/srimon" target="_blank" rel="noopener"
+          class="px-8 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold transition-all">
+          Connect with Srimon
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="bg-gray-900 py-8 px-4">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-indigo-400" viewBox="0 0 24 24" fill="currentColor">
+          <polygon
+            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+        <span class="text-gray-400 font-medium">Prompt Enhancer</span>
+        <span class="text-gray-600">·</span>
+        <span>MIT License © 2026</span>
+        <a href="https://www.linkedin.com/in/srimon"
+          class="text-indigo-400 hover:text-indigo-300 transition-colors">Srimon</a>
+      </div>
+      <div class="flex items-center gap-1 text-xs text-gray-600">
+        <svg class="w-3 h-3 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 1l3.22 6.64L22 8.9l-5 4.93 1.18 6.97L12 17.77l-6.18 3.03L7 13.83 2 8.9l6.78-1.26L12 1z" />
+        </svg>
+        No tracking · No analytics · Prompts stay in your browser
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
