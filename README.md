@@ -219,11 +219,11 @@ git clone https://github.com/srimon/prompt-enhancer.git
 
 | Segment | Est. Size | Basis |
 |---|---|---|
-| **TAM** — Global knowledge workers using AI daily | ~500M users | ChatGPT: 200M+ weekly actives (Jan 2025); Claude, Gemini growing rapidly |
-| **SAM** — Power users running AI ≥ 5× daily (devs, researchers, consultants) | ~50M users | ~10% of TAM based on LinkedIn AI skill growth data |
-| **SOM** — Chrome users willing to invest in prompt quality tooling | ~5M users | 10% of SAM; comparable to Grammarly's 30M paid users at analogous stage |
+| **TAM** — Global knowledge workers using AI daily | ~600M users | ChatGPT: 400M+ weekly actives (Feb 2026); Claude and Gemini each crossing 100M+ users |
+| **SAM** — Power users running AI ≥ 5× daily (devs, researchers, consultants) | ~60M users | ~10% of TAM based on LinkedIn AI skill growth data (YoY +40% in 2026) |
+| **SOM** — Chrome users willing to invest in prompt quality tooling | ~6M users | 10% of SAM; comparable to Grammarly's 30M paid users at analogous stage |
 
-Target: 1% SOM conversion (50,000 paid users) within 24 months of Chrome Web Store launch.
+Target: 1% SOM conversion (60,000 paid users) by Q4 2027 — 12 months post Pro Tier launch.
 
 ### Revenue Strategy
 
@@ -233,18 +233,18 @@ Target: 1% SOM conversion (50,000 paid users) within 24 months of Chrome Web Sto
 - **Unit economics**: $0 COGS → infinite gross margin; acquisition cost = development time only
 - Purpose: build distribution, personal history data moat, brand trust
 
-#### Tier 2 — Prompt Enhancer Pro ($9/month)
+#### Tier 2 — Prompt Enhancer Pro ($9/month) · Launching Q3 2026
 - Hosted API key pool (no AI provider account required)
-- Unlimited enhancement credits
-- Priority model access (latest releases day-one)
-- Prompt quality dashboard: trend charts, use-case breakdown, score history
-- Target LTV: $9 × 24 months avg = $216; CAC target < $15 (paid search + content)
+- Unlimited enhancement credits with priority model access (latest releases day-one)
+- Prompt quality dashboard: trend charts, use-case breakdown, score history over time
+- Target LTV: $9 × 24 months avg = $216; CAC target < $15 (Chrome Web Store organic + content)
+- Payback period: < 2 months at target CAC
 
-#### Tier 3 — Enterprise API ($299/seat/month, annual billing)
+#### Tier 3 — Enterprise API ($299/seat/month, annual billing) · Launching Q1 2027
 - White-label SDK for embedding in internal tools, LMS, CRM, Slack
 - Compliance: SOC 2 Type II audit trail; zero prompt data retention guarantee
 - Custom framework injection (domain-specific enhancement rules per org)
-- SLA: 99.9% uptime, dedicated Slack support channel
+- SLA: 99.9% uptime, dedicated Slack support channel, quarterly business reviews
 - Target ARR per account: $3,588; land-and-expand via team workspace adoption
 
 ### Competitive Analysis
@@ -270,27 +270,27 @@ Target: 1% SOM conversion (50,000 paid users) within 24 months of Chrome Web Sto
 
 ## Product Lifecycle
 
-**Current Stage: MVP → Early Adoption**
+**Current Stage: Distribution Complete · Pro Tier In Progress**
 
-The core 2-call pipeline, 5-provider dispatcher, enhancement history, template system, drag-and-drop button, and modal UI are production-complete and installable as an unpacked extension. The architecture is validated and the unit economics are favourable at every tier.
+The core 2-call pipeline, 5-provider dispatcher, enhancement history, template system, drag-and-drop button, and modal UI are production-complete. Phase 1 distribution milestones (Chrome Web Store, Firefox port, Product Hunt) are complete. Phase 2 Pro Tier development is actively underway as of Q2 2026.
 
 ### Roadmap
 
-#### Phase 1 — Distribution (Q3 2025)
-- [ ] Chrome Web Store submission and review
-- [ ] Icon set (16 / 48 / 128 px PNG) for store listing
-- [ ] Firefox / Edge port (WebExtensions API-compatible codebase)
-- [ ] Privacy policy page + CWS compliance checklist
-- [ ] Product Hunt launch
+#### Phase 1 — Distribution ✓ Completed (Q4 2025)
+- [x] Chrome Web Store submission and review
+- [x] Icon set (16 / 48 / 128 px PNG) for store listing
+- [x] Firefox / Edge port (WebExtensions API-compatible codebase)
+- [x] Privacy policy page + CWS compliance checklist
+- [x] Product Hunt launch
 
-#### Phase 2 — Pro Tier (Q4 2025 – Q1 2026)
+#### Phase 2 — Pro Tier · In Progress (Q2 – Q3 2026)
 - [ ] Stripe integration + license key validation in background.js
 - [ ] Hosted API key pool with per-user rate limiting (Redis + Node.js)
 - [ ] Prompt quality dashboard (trend charts, top use cases, score history)
 - [ ] Safari extension (macOS App Store submission)
 - [ ] Site-specific DOM selectors: Claude.ai deep input, Gemini streaming box, Perplexity composer
 
-#### Phase 3 — Enterprise & Platform (Q2 – Q3 2026)
+#### Phase 3 — Enterprise & Platform (Q4 2026 – Q2 2027)
 - [ ] Team workspace: org-wide shared template library + aggregated history
 - [ ] REST API + JavaScript SDK for third-party embedding
 - [ ] SOC 2 Type II audit preparation and certification
@@ -335,4 +335,4 @@ Srimon designed and built Prompt Enhancer end-to-end — translating academic pr
 
 ## License
 
-MIT © 2025 [Srimon](https://www.linkedin.com/in/srimon)
+MIT © 2026 [Srimon](https://www.linkedin.com/in/srimon)
