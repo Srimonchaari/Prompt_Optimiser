@@ -8,11 +8,13 @@ const INPUT_SELECTORS = [
   '[contenteditable="true"]',
   '[role="textbox"]',
   '[aria-multiline="true"]',
+  '.ProseMirror',                        // Claude.ai Tiptap / ProseMirror editor
+  '[data-testid="chat-input"]',          // Claude.ai wrapper fallback
 ].join(',');
 
 // Minimum dimensions to qualify as an AI chat input field
 const MIN_WIDTH = 150;
-const MIN_HEIGHT = 30;
+const MIN_HEIGHT = 20; // lowered from 30 — Claude.ai's editor can be ~24px tall when empty
 
 // ─── State ────────────────────────────────────────────────────────────────────
 const state = {
@@ -52,6 +54,7 @@ async function init() {
   if (state.isEnabled) {
     attachToExistingInputs();
     setupMutationObserver();
+    setupFocusInFallback(); // catches inputs the mutation observer missed (e.g. Claude.ai SPA nav)
   }
 
   chrome.storage.onChanged.addListener((changes) => {
@@ -79,6 +82,20 @@ function setupMutationObserver() {
 
 function attachToExistingInputs() {
   findInputs(document).forEach(attach);
+}
+
+// Fallback for SPAs (Claude.ai, Gemini) where the editor mounts after the
+// mutation observer fires. On focusin, check if the newly-focused element
+// is an unattached input and attach on the spot.
+function setupFocusInFallback() {
+  document.addEventListener('focusin', (e) => {
+    if (!state.isEnabled) return;
+    const el = e.target;
+    if (!el || el._peAttached) return;
+    if (el.matches?.(INPUT_SELECTORS) && isUsableInput(el)) {
+      attach(el);
+    }
+  }, true); // capture phase — fires before the element's own focus handlers
 }
 
 function findInputs(root) {
