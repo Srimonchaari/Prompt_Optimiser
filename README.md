@@ -213,92 +213,6 @@ git clone https://github.com/srimon/prompt-enhancer.git
 
 ---
 
-## Business Model
-
-### Market Opportunity
-
-| Segment | Est. Size | Basis |
-|---|---|---|
-| **TAM** — Global knowledge workers using AI daily | ~600M users | ChatGPT: 400M+ weekly actives (Feb 2026); Claude and Gemini each crossing 100M+ users |
-| **SAM** — Power users running AI ≥ 5× daily (devs, researchers, consultants) | ~60M users | ~10% of TAM based on LinkedIn AI skill growth data (YoY +40% in 2026) |
-| **SOM** — Chrome users willing to invest in prompt quality tooling | ~6M users | 10% of SAM; comparable to Grammarly's 30M paid users at analogous stage |
-
-Target: 1% SOM conversion (60,000 paid users) by Q4 2027 — 12 months post Pro Tier launch.
-
-### Revenue Strategy
-
-#### Tier 1 — Free / BYOK (Current)
-- Zero marginal cost per user (no server, no inference — user pays provider directly)
-- Zero CAC: Chrome Web Store organic discovery
-- **Unit economics**: $0 COGS → infinite gross margin; acquisition cost = development time only
-- Purpose: build distribution, personal history data moat, brand trust
-
-#### Tier 2 — Prompt Enhancer Pro ($9/month) · Launching Q3 2026
-- Hosted API key pool (no AI provider account required)
-- Unlimited enhancement credits with priority model access (latest releases day-one)
-- Prompt quality dashboard: trend charts, use-case breakdown, score history over time
-- Target LTV: $9 × 24 months avg = $216; CAC target < $15 (Chrome Web Store organic + content)
-- Payback period: < 2 months at target CAC
-
-#### Tier 3 — Enterprise API ($299/seat/month, annual billing) · Launching Q1 2027
-- White-label SDK for embedding in internal tools, LMS, CRM, Slack
-- Compliance: SOC 2 Type II audit trail; zero prompt data retention guarantee
-- Custom framework injection (domain-specific enhancement rules per org)
-- SLA: 99.9% uptime, dedicated Slack support channel, quarterly business reviews
-- Target ARR per account: $3,588; land-and-expand via team workspace adoption
-
-### Competitive Analysis
-
-| Dimension | **Prompt Enhancer** | PromptSloth | PromptPerfect |
-|---|---|---|---|
-| **Data privacy** | BYOK — keys + history stay local | Cloud-processed | Cloud-processed |
-| **Subscription required** | No (free BYOK tier) | Yes | Yes ($10–99/mo) |
-| **In-flow UX** | ★ in-page button, no tab switch | Separate tool | Separate tool |
-| **Algorithm depth** | 2-call Reflect-Refine + gradients + few-shot | Single-pass | Single-pass |
-| **Provider flexibility** | 5 providers, 15+ models | Limited | Limited |
-| **Personal history** | Dynamic few-shot from own history | None | None |
-| **Open source** | Yes | No | No |
-
-### Churn Mitigation & Switching Cost
-
-- **Data moat**: Enhancement history creates a personalised few-shot library. Switching to a competitor resets this; quality degrades on day one of any alternative.
-- **Template library**: Custom `//trigger` shortcuts accumulate over time; migration friction increases with use.
-- **Team lock-in** (Phase 3): Org-wide shared templates and history create account-level switching cost independent of individual preference.
-- **Retention mechanic**: History hint in popup ("23 saved — personalised examples active") makes the compounding value visible to users.
-
----
-
-## Product Lifecycle
-
-**Current Stage: Distribution Complete · Pro Tier In Progress**
-
-The core 2-call pipeline, 5-provider dispatcher, enhancement history, template system, drag-and-drop button, and modal UI are production-complete. Phase 1 distribution milestones (Chrome Web Store, Firefox port, Product Hunt) are complete. Phase 2 Pro Tier development is actively underway as of Q2 2026.
-
-### Roadmap
-
-#### Phase 1 — Distribution ✓ Completed (Q4 2025)
-- [x] Chrome Web Store submission and review
-- [x] Icon set (16 / 48 / 128 px PNG) for store listing
-- [x] Firefox / Edge port (WebExtensions API-compatible codebase)
-- [x] Privacy policy page + CWS compliance checklist
-- [x] Product Hunt launch
-
-#### Phase 2 — Pro Tier · In Progress (Q2 – Q3 2026)
-- [ ] Stripe integration + license key validation in background.js
-- [ ] Hosted API key pool with per-user rate limiting (Redis + Node.js)
-- [ ] Prompt quality dashboard (trend charts, top use cases, score history)
-- [ ] Safari extension (macOS App Store submission)
-- [ ] Site-specific DOM selectors: Claude.ai deep input, Gemini streaming box, Perplexity composer
-
-#### Phase 3 — Enterprise & Platform (Q4 2026 – Q2 2027)
-- [ ] Team workspace: org-wide shared template library + aggregated history
-- [ ] REST API + JavaScript SDK for third-party embedding
-- [ ] SOC 2 Type II audit preparation and certification
-- [ ] LMS / CRM integrations: Notion, Salesforce, Slack, HubSpot
-- [ ] Custom framework injection per organization (domain-specific RISEN/COSTAR variants)
-
----
-
 ## Product Owner
 
 | | |
@@ -307,7 +221,7 @@ The core 2-call pipeline, 5-provider dispatcher, enhancement history, template s
 | **Role** | Builder · AI Product Architect · Full-Stack Engineer |
 | **LinkedIn** | [linkedin.com/in/srimon](https://www.linkedin.com/in/srimon) |
 
-Srimon designed and built Prompt Enhancer end-to-end — translating academic prompt optimization research (Pryzant et al., LangChain) into a production Chrome extension with a clear path from free tool to enterprise SaaS. The project demonstrates applied AI product thinking across the full stack: research-backed pipeline design, zero-backend privacy architecture, multi-provider API dispatch, DOM injection, and a complete popup UI — all shipped without external dependencies.
+Srimon designed and built Prompt Enhancer end-to-end — translating academic prompt optimization research (Pryzant et al., LangChain) into a production Chrome extension. The project demonstrates applied AI product thinking across the full stack: research-backed pipeline design, zero-backend privacy architecture, multi-provider API dispatch, DOM injection, and a complete popup UI — all shipped without external dependencies.
 
 ---
 
